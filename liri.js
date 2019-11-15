@@ -84,13 +84,16 @@ function spotifySearch(search) {
         }
 
         var data = data.tracks.items[0];
-
-        var responseString = "Artist: " + data.artists[0].name +
-            "\nSong Name: " + data.name +
-            "\nLink to Listen: " + data.external_urls.spotify +
-            "\nAlbum: " + data.album.name;
-
-        appendResponse(responseString);
+        if (data) {
+            var responseString = "Artist: " + data.artists[0].name +
+                "\nSong Name: " + data.name +
+                "\nLink to Listen: " + data.external_urls.spotify +
+                "\nAlbum: " + data.album.name;
+            appendResponse(responseString);
+        } else {
+            search = "The Sign Ace of Base";
+            spotifySearch(search);
+        }
     });
 }
 
