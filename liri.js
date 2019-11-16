@@ -55,7 +55,6 @@ function appendResponse(stringResponse) {
 
         console.log(stringResponse);
     });
-
 }
 
 //function to search BandsInTown with axios and then append the necessary information to a string
@@ -107,19 +106,21 @@ function movieSearch(search) {
 
             var data = response.data;
 
-            var responseString = "Movie Title: " + data.Title +
-                "\nRelease Year: " + data.Year +
-                "\nIMDB Rating: " + data.imdbRating +
-                "\nRotten Tomatoes Rating:" + data.Ratings[1].Value +
-                "\nCountry: " + data.Country +
-                "\nLanguages: " + data.Languages +
-                "\nPlot: " + data.Plot +
-                "\nActors: " + data.Actors;
-
-            appendResponse(responseString);
-
+            if (data.Response === "True") {
+                var responseString = "Movie Title: " + data.Title +
+                    "\nRelease Year: " + data.Year +
+                    "\nIMDB Rating: " + data.imdbRating +
+                    "\nRotten Tomatoes Rating: " + data.Ratings[1].Value +
+                    "\nCountry: " + data.Country +
+                    "\nLanguages: " + data.Languages +
+                    "\nPlot: " + data.Plot +
+                    "\nActors: " + data.Actors;
+                appendResponse(responseString);
+            } else {
+                search = "Mr. Nobody";
+                movieSearch(search);
+            }
         });
-
 }
 
 //function to change command and search and then rerun the switch statement
@@ -134,9 +135,7 @@ function doWhatItSays() {
         search = data[1];
 
         switchCommand(command);
-
     });
-
 }
 
 //initally run the switch statement
